@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Weather from "./WeatherClass";
 function WeatherCardSmall(props) {
 
     const [state, Setstate] = useState({
@@ -22,12 +21,11 @@ function WeatherCardSmall(props) {
                 var icon = props.class.geticon(result.weather[0].main)
                 var dt = result.dt * 1000
                 var dateObject = new Date(dt)
-                console.log(result)
                 var min = Math.round(result.temp.min)
                 var max = Math.round(result.temp.max)
                 var day
                 if (state.id === 0) day = "Today"
-                else day = dateObject.toLocaleString("en-US", { weekday: "long" })
+                else day = dateObject.toLocaleString("en-US", { weekday: "short" })
 
                 Setstate((previous => {
                     return {
@@ -45,7 +43,7 @@ function WeatherCardSmall(props) {
         }
 
         setclass()
-    }, [props.class])
+    }, [props.class,state.id])
 
     if (state.class) {
         return (
